@@ -27,9 +27,9 @@ docker swarm
 useradd
 passwd
 nano /etc/hosts
-Manager Node – 192.168.1.103 dockermanager
-Worker Node1 – 192.168.1.107 dockerworker1
-Worker Node2 – 192.168.1.108 dockerworker2
+Manager Node â€“ 192.168.1.103 dockermanager
+Worker Node1 â€“ 192.168.1.107 dockerworker1
+Worker Node2 â€“ 192.168.1.108 dockerworker2
 # ping dockerworker1
 # ping dockerworker2
 From Docker Worker Node 1
@@ -83,7 +83,7 @@ EOF
 # apt-get update 
 # apt-get install -y kubelet kubeadm kubectl 
 # nano /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
-Environment=”cgroup-driver=systemd/cgroup-driver=cgroupfs” 
+Environment=â€cgroup-driver=systemd/cgroup-driver=cgroupfsâ€ 
 # kubeadm init --apiserver-advertise-address=<ip-address-of-kmastervm> --v=5 --pod-network-cidr=192.168.0.0/16 
 #exit
 $ mkdir -p $HOME/.kube 
@@ -108,7 +108,7 @@ ___________________________________________________________________
 jenkins
 # apt-get update
 # apt-get install openjdk-7-jdk
-# java –version
+# java â€“version
 # wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
 # echo deb http://pkg.jenkins.io/debian-stable binary/| sudo tee /etc/apt/sources.list.d/jenkins.list
 # sudo apt-get update
@@ -140,7 +140,7 @@ git config --global color.ui true
 $ git config --global color.status auto
 
 $ git config --global color.branch auto
-$ git config –list
+$ git config â€“list
 
 git init
 git status
@@ -156,7 +156,7 @@ git checkout <branch_name> and then
 git commit
 
 git add test3.txt
-git commit -m”adding test3.txt” 
+git commit -mâ€adding test3.txtâ€ 
 
 git merge <branch_name>
 
