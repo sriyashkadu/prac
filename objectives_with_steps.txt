@@ -1,0 +1,153 @@
+Practice exam objectives
+____________________________________________________________
+
+1) codenvy to github
+
+2) jenkins to github
+
+3) running a container inside docker
+
+4) saving a container as an image in docker, creating a 
+   program in it and running it.
+   [creating image using container]
+
+5) create your own docker image using Dockerfile such that 
+   each time the image is run, it will execute a c program 
+   that displays your PRN.
+   [creating image using Dockerfile]
+   
+6) create a docker container and start a website in it.
+____________________________________________________________
+
+Objective:3
+------------------------------------------------------------
+1) Install docker using:
+sudo apt-get install docker.io
+sudo docker --version
+
+2) start a ubuntu container in docker
+docker run --name mycontainer -ti ubuntu
+(this will open a shell in the new ubuntu image,
+in your current shell itself, notice change in root name.
+Open a new terminal now to see the staus of your container)
+
+3) run: systemctl status docker, then ctrl+c to come out of it,
+then run: docker ps, to see the container running
+____________________________________________________________
+
+Objective:4
+------------------------------------------------------------
+1) follow Objective:3 all steps
+
+2) docker commit <name-of-container> <name-of-image>
+docker commit mycontainer myubuntuimage 
+[use python,ubuntu image doesnt let you do anything inside]
+docker images //to see the image created
+
+2) docker run --name mycontainer -ti python:3.6
+opens the python shell
+in other terminl from your base os,
+docker commit mycontainer mypythonimage
+docker images
+____________________________________________________________
+
+Objective:5
+------------------------------------------------------------
+
+1) Write a hello.c program in your base ubuntu machine
+
+2) Write a Dockerfile to create a container and execute it
+//Dockerfile examples 1 see bottom
+
+3) Build the container using the Dockerfile
+docker build -t <your-container-name> .
+docker build -t hello:v1 .
+
+4) Run the container
+docker run hello:v1
+
+____________________________________________________________
+
+helpful notes in case of errors
+------------------------------------------------------------
+
+1)Facing this error???
+"E: Could not get lock /var/lib/dpkg/lock-frontend - 
+open (11: Resource temporarily unavailable)
+E: Unable to acquire the dpkg frontend lock 
+(/var/lib/dpkg/lock-frontend),is another process using it?"
+
+run: ps aux | grep -i apt
+sudo kill -9 <process id that is using _apt>
+or
+sudo killall apt apt-get
+------------------------------------------------------------
+
+2)Facing this???
+"dpkg: error: dpkg frontend is locked by another process"
+
+run: lsof /var/lib/dpkg/lock-frontend 
+--gives list of all pids having the lock,
+sudo kill -9 <pid>
+or simply do these three,
+1.sudo killall -9 dpkg
+2.sudo rm /var/lib/dpkg/lock-frontend
+3.sudo dpkg --configure -a
+4. now run your previous command that failed
+------------------------------------------------------------
+
+DOCKERFILE EXAMPLES
+____________________________________________________________
+
+//example 1
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get -y install gcc
+COPY hello.c hi.c
+RUN gcc -o hell hello.c
+CMD ["./hell"]
+
+_____________________________________________________________
+GIT COMMANDS
+_____________________________________________________________
+
+to initialize empty git repo
+git init
+
+to clone an existing repo
+git clone <repo url>
+
+to add remote repo
+git remote add origin "<url of remote repo>"
+
+to commit the code
+git commit -m "commit mesage"
+
+to push code to remote repo
+git push origin master
+
+to check status
+git status
+
+to create branch
+git branch <new branch name>
+
+to see all branches
+git branch
+
+to shift to another branch
+git checkout <other branch name>
+
+to push to a particular branch
+git push -u <url> <branchname>
+
+to see all remote repos
+git remote -v
+
+to see all recent commits on this branch, useful to revert back to an older version
+git reflog
+
+to revert to an older version (older committed version)
+git revert --help (to see the help)
+git revert <commit code>
+

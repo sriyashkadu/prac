@@ -1,0 +1,40 @@
+
+--------------------------------dockerworker------------------------------------------
+apt-get update
+vi /etc/hosts
+------add to host file------------
+ping dockermanager -c 3
+ping dockerworker1 -c 3
+ping dockerworker2 -c 3
+apt-get update
+apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-get update
+apt-get install docker-ce
+systemctl start docker
+systemctl status docker
+---------common----------
+docker run hello-world
+docker swarm join --token SWMTKN-1-2j1xa0ybikpt4m0o984oz6720a3ky14n9qkjb7fggm3wly3m7x-aryd4vsr420yg6xa7vf9vlxdj 192.168.23.153:2377
+
+
+
+-----------------------------------manager------------------------------
+vi /etc/hosts
+ping dockermanager -c 3
+ping dockerworker1 -c 3
+ping dockerworker2 -c 3
+apt-get update
+apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-get update
+apt-get install docker-ce
+systemctl start docker
+systemctl status docker
+docker run hello-world
+-------common----------
+docker swarm init --advertise-addr 192.168.23.153(MASTER IP)
+docker node ls
+
